@@ -1,4 +1,4 @@
-**[Верхний уровень](https://github.com/KristianKuznetsov/JavaPractice)**
+
 
 # Книжная полка
 
