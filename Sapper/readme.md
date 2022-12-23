@@ -1,4 +1,3 @@
-**[Верхний уровень](https://github.com/KristianKuznetsov/JavaPractice)**
 
 # Программа, отображающая игровое поле для игры "Сапер"
 
