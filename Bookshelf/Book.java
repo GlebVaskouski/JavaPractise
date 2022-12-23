@@ -1,38 +1,51 @@
-public class Book {
-    String title;
-    String author;
+package books;
 
-    public Book(String title, String author) {
-        this.title = title;
-        this.author = author;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+class Book implements Comparable <Book> {
+    private String name;
+    private String author;
+    public String getName() {
+        return this.name;
     }
-
-    public Book() {
-        this.title = "NO";
-        this.author = "NO";
+    public String getAuthor(){
+        return this.author;
     }
-
-    public String getTitle() {
-        return title;
+    public void setName(String name_) {
+        this.name = name_;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setAuthor(String author_){
+        this.author = author_;
     }
-
-    public String getAuthor() {
-        return author;
+    public Book(String name_, String author_){
+        this.name = name_;
+        this.author = author_;
     }
-
-    public void setAuthor(String author) {
-        this.author = author;
+    public Book(){
+        this.name = "";
+        this.author = "";
     }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "title = '" + title + '\'' +
-                ", author = '" + author + '\'' +
-                '}';
+    @Override public String toString(){
+        return this.author + ", \"" + this.name + "\"";
+    }
+    @Override public boolean equals(Object b2){
+        if (!(b2 instanceof Book)) return false;
+        if (this.name == ((Book)b2).getName() && this.author == ((Book)b2).author)
+            return true;
+        return false;
+    }
+    @Override public int compareTo(Book b2){
+        return this.name.compareTo(b2.name);
     }
 }
+
+class BookComparator implements Comparator<Book> {
+    @Override public int compare(Book b1, Book b2) {
+        return b1.getAuthor().compareTo(b2.getAuthor());
+    }
+}
+

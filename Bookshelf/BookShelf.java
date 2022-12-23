@@ -1,103 +1,75 @@
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+package books;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookShelf {
-    ArrayList<Book> shelf;
+    private ArrayList<Book> Shelf;
 
-    public BookShelf(ArrayList<Book> shelf) {
-        this.shelf = shelf;
+    public BookShelf(Book param) {
+        Shelf.add(param);
     }
 
     public BookShelf() {
-        this.shelf = new ArrayList<Book>();
+        Shelf = new ArrayList<Book>();
     }
 
-    public void addEmptyBook(){
-        this.shelf.add(new Book());
-    }
-
-    public void addBook(String title, String author){
-        this.shelf.add(new Book(title, author));
-    }
-
-    public void cOut(){
-        if(this.shelf.isEmpty()) System.out.println("На полке нет книг!");
-        else{
-            for (Book b : this.shelf) {
-                System.out.println(b.toString());
-            }
+    public void getShelf(FileWriter fw) throws IOException {
+        for (int i = 0; i < Shelf.size(); i++) {
+            fw.write(Shelf.get(i).toString() + "\n");
         }
     }
 
-    public void sortByAuthorName(){
-        this.shelf.sort((a, b) -> a.getAuthor().compareTo(b.getAuthor()));
-    }
-
-    public void sortByBookName(){
-        this.shelf.sort((a, b) -> a.getTitle().compareTo(b.getTitle()));
-    }
-
-    public ArrayList<Book> FilterByAuthorName(String authorNameToFilter) {
-        var stream = shelf.stream();
-        ArrayList<Book> result = (stream.filter(m -> m.getAuthor().equals(authorNameToFilter)).collect(Collectors.toCollection(ArrayList::new)));
-        return result;
-    }
-
-    public int numberOfBooksByThisAuthor(String authorName) {
-        var stream = shelf.stream();
-        int counter = (int) stream.filter(m -> m.getAuthor().equals(authorName)).count();
-        return counter;
-    }
-
-    public Map<String, List<Book>> groupByAuthor(){
-        var stream = this.shelf.stream();
-        Map<String, List<Book>> result = stream.collect(Collectors.groupingBy(Book::getAuthor));
-        return result;
-    }
-
-    public void cOutMapByAuthor(Map<String, List<Book>> map){
-        for (String key : map.keySet()) {
-            System.out.println("Книги " + key + " Автора:");
-            for (Book sh : map.get(key)) {
-                System.out.println(sh.toString());
-            }
-            System.out.println();
+    public void outShelf() {
+        for (int i = 0; i < Shelf.size(); i++) {
+            System.out.println(Shelf.get(i).toString());
         }
     }
-    public void arrayListCOut(ArrayList<Book> books){
-        if(books.isEmpty()) System.out.println("Нет книг");
-        else {
-            for (Book b : books) {
-                System.out.println(b.toString());
-            }
-        }
-    }
-    public void writeJSON(String jsonFileName) throws IOException {
-        FileWriter fr = new FileWriter(jsonFileName);
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String jString = objectMapper.writeValueAsString(this.shelf);
-        fr.write(jString);
-        fr.close();
+
+    public ArrayList<Book> getShelf() {
+        return Shelf;
     }
 
-    public void readJSON(String jsonFileName) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonBookArray = "";
-        Scanner sc = new Scanner(new FileReader(jsonFileName));
-        while (sc.hasNextLine()){
-            jsonBookArray += sc.nextLine();
+    public void InsertBook(Book to_insert) {
+        Shelf.add(to_insert);
+    }
+
+    public void NameSort() {
+        Collections.sort(Shelf);
+    }
+
+    public void AuthorSort() {
+        Shelf.sort((Book lhs, Book rhs) -> {
+            if (lhs.getAuthor().equals(rhs.getAuthor())) {
+                return lhs.getName().compareTo(rhs.getName());
+            } else return lhs.getAuthor().compareTo(rhs.getAuthor());
+        });
+    }
+
+    public int AuthorBooks(String author_) {
+        List<Book> books = Shelf.stream().filter(book -> book.getAuthor().equals(author_)).collect(Collectors.toList());
+        for (int i = 0; i < books.size(); i++) {
+            System.out.println(books.get(i));
         }
-        List<Book> list = objectMapper.readValue(jsonBookArray, new TypeReference<List<Book>>(){});
-        this.shelf = new ArrayList<Book>(list);
+        return books.size();
+    }
+
+    public String binarySearch(Book to_search) {
+        int index = Collections.binarySearch(Shelf, to_search);
+        if (index > 0) return Shelf.get(index).toString();
+        else return "No";
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < Shelf.size(); i++) {
+            str.append(Shelf.get(i).toString() + "\n");
+        }
+        return str.toString();
     }
 }
