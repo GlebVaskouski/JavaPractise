@@ -1,4 +1,4 @@
-**[Верхний уровень](https://github.com/KristianKuznetsov/JavaPractice)**
+
 
 # Таблица (Обувной магазин)
 
@@ -31,5 +31,3 @@ ___
 ___
   
 - **Разработать UI интерфейс, визуализирующий класс магазин**
-
-![Итоговый вид](https://github.com/KristianKuznetsov/JavaPractice/blob/main/Additional%20materials/2022-12-23_02-01-12.png)
