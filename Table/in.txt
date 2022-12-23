@@ -1,0 +1,12 @@
+"Air" (Nike) 01.2021 55 99.99
+41 (Nike) 03.2021 "Boost" 12.34
+10.2022 38 (Adidas) 17.45 "BONEGA"
+(Nike) 54.96 "Jordans" 15 01.2021
+23.81 10.2022 (NewBalance) "Jack" 64
+(Adidas) 12 55.44 "OZELIA" 09.2022
+(Adidas) 08.2022 13.21 "CELOX" 100
+8.30 (NewBalance) 37 10.2022 "LIFESTYLE"
+(Nike) 14 "Offense" 10.2022 140.67
+9 (Nike) 180.50 06.2020 "Brazen"
+400.66 (Adidas) 01.2021 75 "SUPERSTAR"
+(NewBalance) 42.18 "Sport" 01.2021 99
