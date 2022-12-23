@@ -1,4 +1,3 @@
-**[Верхний уровень](https://github.com/KristianKuznetsov/JavaPractice)**
 
 # Найти сумму чисел в строке
 
